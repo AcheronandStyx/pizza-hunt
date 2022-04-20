@@ -1,4 +1,4 @@
-const { Schema, model } = require("mongoose");
+const { Schema, model, Types } = require("mongoose");
 const dateFormat = require("../utils/dateFormat");
 
 const PizzaSchema = new Schema(
@@ -42,7 +42,11 @@ const PizzaSchema = new Schema(
 // get total count of comments and replies on retrieval
 // virtuals are not in the database and are usually computed values
 PizzaSchema.virtual("commentCount").get(function () {
-  return this.comments.length;
+  // so it includes replies as well
+  return this.comments.reduce(
+    (total, comment) => total + comment.replies.length + 1,
+    0
+  );
 });
 
 // create the Pizza model using the PizzaSchema
