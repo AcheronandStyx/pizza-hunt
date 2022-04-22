@@ -5,9 +5,13 @@ const PizzaSchema = new Schema(
   {
     pizzaName: {
       type: String,
+      required: true,
+      trim: true,
     },
     createdBy: {
       type: String,
+      required: true,
+      trim: true, // just like js remove whitespace before and after the string
     },
     createdAt: {
       type: Date,
@@ -18,6 +22,8 @@ const PizzaSchema = new Schema(
     },
     size: {
       type: String,
+      required: true,
+      enum: ["Personal", "Small", "Medium", "Large", "Extra Large"], // the enum option stands for enumerable, a popular term in web development that refers to a set of data that can be iterated over—much like using the for...in loop to iterate through an object.
       default: "Large",
     },
     toppings: [], // [] indicates an array type
