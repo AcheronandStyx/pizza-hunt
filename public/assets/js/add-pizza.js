@@ -64,6 +64,7 @@ const handlePizzaSubmit = (event) => {
     })
     .catch((err) => {
       console.log(err);
+      saveRecord(formData); // save the formdata if it errors out
     });
 };
 
